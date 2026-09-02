@@ -11,9 +11,9 @@
 ;; remove this notice, or any other, from this software.
 
 (ns
-  ^{:author "Konrad Hinsen"
-     :skip-wiki true
-     :doc "Generic interfaces
+ ^{:author "Konrad Hinsen"
+   :skip-wiki true
+   :doc "Generic interfaces
            This library provides generic interfaces in the form of
            multimethods that can be implemented for any type.
            The interfaces partly duplicate existing non-generic
@@ -21,19 +21,7 @@
            collections) and partly provide additional functions that
            can be defined for a wide variety of types (functors, math
            functions)."}
-  clojure.algo.generic)
-
-;
-; A dispatch function that separates nulary, unary, binary, and
-; higher arity calls and also selects on type for unary and binary
-; calls.
-;
-(defn nary-dispatch
-  ([] ::nulary)
-  ([x] (type x))
-  ([x y]
-     [(type x) (type y)])
-  ([x y & more] ::nary))
+ clojure.algo.generic)
 
 ;
 ; We can't use [::binary :default], so we need to define a root type
@@ -44,6 +32,18 @@
 ;
 (def root-type ::any)
 (derive #?(:clj Object :cljs js/Object) root-type)
+
+;
+; A dispatch function that separates nulary, unary, binary, and
+; higher arity calls and also selects on type for unary and binary
+; calls.
+;
+(defn nary-dispatch
+  ([] ::nulary)
+  ([x] (or (type x) root-type))
+  ([x y]
+   [(or (type x) root-type) (or (type y) root-type)])
+  ([x y & more] ::nary))
 
 ;
 ; Symbols referring to ::nulary and ::n-ary

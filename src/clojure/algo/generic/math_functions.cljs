@@ -20,10 +20,11 @@
            This library defines generic versions of common mathematical
            functions such as sqrt or sin as multimethods that can be
            defined for any type."}
-    clojure.algo.generic.math-functions
-    (:require [clojure.algo.generic.arithmetic :as ga]
-              [clojure.algo.generic.comparison :as gc])
-    (:require-macros [clojure.algo.generic.macros :refer [defmathfn-1 defmathfn-2]]))
+  clojure.algo.generic.math-functions
+  (:refer-clojure :exclude [abs])
+  (:require [clojure.algo.generic.arithmetic :as ga]
+            [clojure.algo.generic.comparison :as gc])
+  (:require-macros [clojure.algo.generic.macros :refer [defmathfn-1 defmathfn-2]]))
 
 
 ; List of math functions taken from
