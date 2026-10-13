@@ -172,13 +172,13 @@
 #?(:clj
    (do
      (defmethod + [java.lang.Number java.lang.Number]
-       [x y] (clojure.core/+ x y))
+       [x y] (clojure.core/+' x y))
 
      (defmethod - java.lang.Number
-       [x] (clojure.core/- x))
+       [x] (clojure.core/-' x))
 
      (defmethod * [java.lang.Number java.lang.Number]
-       [x y] (clojure.core/* x y))
+       [x y] (clojure.core/*' x y))
 
      (defmethod / java.lang.Number
        [x] (clojure.core// x))))
